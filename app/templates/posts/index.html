@@ -1,0 +1,17 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+    <span class="title"><h1>{% block title %} The Posts Page {% endblock %}</h1></span>
+    {% for post in posts %}
+    <a href="{{ url_for('posts.post', post_id=post['id']) }}">
+        <h2>{{ post['title'] }}</h2>
+    </a>
+    <span class="badge badge-primary">{{ post['published_at'] }}</span>
+    {% if post['author_id'] == author_id %}
+    <a href="{{ url_for('posts.edit', id=post['id']) }}">
+        <span class="badge badge-warning">Edit</span>
+    </a>
+    {% endif %}
+    <hr>
+    {% endfor %}
+{% endblock %}
